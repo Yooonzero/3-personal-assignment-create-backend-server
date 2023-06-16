@@ -9,11 +9,12 @@ router.post('/comments/:postId', async (req, res) => {
     const { user, password, content } = req.body;
     try {
         const createdComment = await Comments.create({
+            postId,
             user,
             password, // body에 0이라는 숫자가 들어가면 SyntaxError: Unexpected number in JSON at position 49 라는 오류가 발생 이유는 모름.
             content,
         });
-        res.status(200).json({ data: { postId, createdComment } }).send({ msg: '댓글을 생성하였습니다.' });
+        res.status(200).send({ msg: '댓글을 생성하였습니다.' });
     } catch (error) {
         if (!content) {
             res.status(400).send({ msg: '댓글 내용을 입력해 주세요.' });
