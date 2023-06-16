@@ -10,13 +10,21 @@ connect();
 app.use(express.json()); // req.body() 문법을 사용하기 위함이다.
 
 app.get('/', (req, res) => {
-    const 재두님에게 = {
+    const waitASecond = {
         현상: '잠시 환기 필요',
         결과: '잠시 나갔다 오겠습니다.',
         시간: '10분 소요 예정',
     };
 
-    res.status(400).json(재두님에게);
+    res.status(200).json(waitASecond);
+});
+
+app.get('/api', (req, res) => {
+    const welcome = {
+        postSection: 'URI에 /posts 를 추가하시면 이동이 가능합니다.',
+        commentSection: 'URI에 /comments/postId 를 추가하시면 이동이 가능합니다.',
+    };
+    res.status(200).json(welcome);
 });
 
 app.use('/api', [postRouter, commentRouter]);
