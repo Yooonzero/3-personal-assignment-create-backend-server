@@ -4,6 +4,7 @@ const port = 3050;
 
 const postRouter = require('./routes/posts.js'); // post 관련 module
 const commentRouter = require('./routes/comments.js');
+
 const connect = require('./schemas'); // 몽고디비 관련 module
 connect();
 
@@ -17,14 +18,6 @@ app.get('/', (req, res) => {
     };
 
     res.status(200).json(waitASecond);
-});
-
-app.get('/api', (req, res) => {
-    const welcome = {
-        postSection: 'URI에 /posts 를 추가하시면 이동이 가능합니다.',
-        commentSection: 'URI에 /comments/postId 를 추가하시면 이동이 가능합니다.',
-    };
-    res.status(200).json(welcome);
 });
 
 app.use('/api', [postRouter, commentRouter]);

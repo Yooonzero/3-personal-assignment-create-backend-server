@@ -6,17 +6,16 @@ const Posts = require('../schemas/post.js');
 router.post('/posts', async (req, res) => {
     const { user, password, title, content } = req.body;
     try {
-        const createdPost = await Posts.create({
+        await Posts.create({
             user,
             password,
             title,
             content,
         });
-        res.send({ message: '게시글을 작성하였습니다.' }).json({ post: createdPost });
+        return res.status(200).json({ message: '게시글을 작성하였습니다.' });
     } catch (error) {
         console.log(error);
         res.status(400).send({ msg: '데이터 형식이 올바르지 않습니다.' });
-        // 위 코드를 활성화 시키면, Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client 라는 오류가 출력.
     }
 });
 
